@@ -1,0 +1,278 @@
+run:
+  go: "1.22"
+  deadline: 5m
+  skip-dirs:
+    - vendor/.*
+  skip-files:
+    # ignore K8s specific object declaration
+    - api/?.*/groupversion_info.go
+    - api/?.*/object_.*.go
+
+# [v1.56.2] https://golangci-lint.run/usage/configuration/
+linters-settings:
+  exhaustive:
+    default-signifies-exhaustive: true
+
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(code.local)
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+    disabled-checks:
+      - commentFormatting
+      - whyNoLint
+
+  godot:
+    capital: true
+    period: true
+    scope: toplevel
+
+  gofumpt:
+    extra-rules: true
+
+  govet:
+    check-shadowing: true
+    enable-all: true
+
+  gosec:
+    config:
+      global:
+        nosec: true
+    confidence: medium
+    severity: medium
+
+  misspell:
+    locale: US
+
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+
+  prealloc:
+    for-loops: true
+    range-loops: true
+    simple: true
+
+  tagliatelle:
+    case:
+      rules:
+        json: goCamel
+        yaml: goCamel
+      use-field-name: true
+
+# [v1.3.7] https://github.com/mgechev/revive/tree/v1.3.7#available-rules
+  revive:
+    severity: warning
+    rules:
+      # - name: add-constant # <=> gomnd
+      - name: argument-limit
+        arguments: 6
+      - name: atomic
+      # - name: banned-characters
+      - name: bare-return
+      - name: blank-imports
+      - name: bool-literal-in-expr
+      - name: call-to-gc
+      # - name: cognitive-complexity # <=> gocognit
+      - name: comment-spacings
+        arguments: ["nolint"]
+      - name: confusing-naming
+      - name: confusing-results
+      - name: constant-logical-expr
+      - name: context-as-argument
+        arguments: [{allowTypesBefore = "*testing.T"}]
+      - name: context-keys-type
+      # - name: cyclomatic # <=> gocyclo, cyclop
+      - name: datarace
+      - name: deep-exit
+      - name: defer
+      - name: dot-imports
+      - name: duplicated-imports
+      - name: early-return
+      - name: empty-block
+      - name: empty-lines
+      - name: enforce-map-style
+      - name: enforce-repeated-arg-type-style
+      - name: enforce-slice-style
+      - name: error-naming
+      - name: error-return
+      - name: error-strings
+      - name: errorf
+      - name: exported
+        arguments: ["checkPrivateReceivers", "sayRepetitiveInsteadOfStutters"]
+      # - name: file-header # <=> goheader
+      - name: flag-parameter
+      # - name: function-length # <=> funlen
+      - name: function-result-limit
+        arguments: 4
+      - name: get-return
+      - name: identical-branches
+      - name: if-return
+      - name: import-alias-naming
+      - name: import-shadowing
+      # - name: imports-blacklist # <=> depguard
+      - name: increment-decrement
+      - name: indent-error-flow
+      - name: line-length-limit # <=> lll
+        arguments: [140]
+      - name: max-control-nesting
+      # - name: max-public-structs
+      - name: modifies-parameter
+      - name: modifies-value-receiver
+      - name: nested-structs
+      - name: optimize-operands-order
+      # - name: package-comments
+      - name: range
+      - name: range-val-address
+      - name: range-val-in-closure
+      - name: receiver-naming
+      - name: redefines-builtin-id
+      - name: redundant-import-alias
+      # - name: string-format
+      - name: string-of-int
+      - name: struct-tag
+      - name: superfluous-else
+      - name: time-equal
+      - name: time-naming
+      # - name: unchecked-type-assertions # enable in future
+      #   arguments: [{acceptIgnoredAssertionResult=true}]
+      - name: unconditional-recursion
+      - name: unexported-naming
+      - name: unexported-return
+      - name: unhandled-error
+        arguments: ["fmt.Printf", "fmt.Println", "fmt.Print"]
+      - name: unnecessary-stmt
+      - name: unreachable-code
+      - name: unused-parameter
+      - name: unused-receiver
+      - name: use-any
+      - name: useless-break
+      - name: var-declaration
+      - name: var-naming
+      - name: waitgroup-by-value
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+  # - copyloopvar # enable in future
+  # - cyclop # <=> revive(cyclomatic), gocyclo
+  # - deadcode # <=> unused
+    - decorder
+  # - depguard # <=> revive(imports-blacklist)
+    - dogsled
+  # - dupl
+    - dupword
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - execinquery
+    - exhaustive
+  # - exhaustivestruct
+  # - exhaustruct
+    - exportloopref
+  # - forbidigo
+    - forcetypeassert
+  # - funlen # <=> revive(function-length)
+    - gci
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+  # - gochecksumtype
+  # - gocognit # <=> revive(cognitive-complexity)
+    - goconst
+    - gocritic
+  # - gocyclo # <=> revive(cyclomatic), cyclop
+    - godot
+    - godox
+  # - goerr113
+  # - gofmt # <=> gofumpt
+    - gofumpt
+  # - goheader # <=> revive(file-header)
+  # - goimports # <=> gofumpt/gofmt && gci
+  # - golint # <=> revive
+    - gomnd # <=> revive(add-constant)
+  # - gomoddirectives
+  # - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - gosmopolitan
+    - govet
+  # - grouper
+  # - ifshort
+  # - importas
+    - inamedparam
+    - ineffassign
+  # - interfacebloat
+  # - interfacer
+  # - intrange # enable in future
+  # - ireturn
+  # - lll # <=> revive(line-length-limit)
+    - loggercheck
+    - maintidx
+  # - makezero
+  # - maligned # <=> govet(fieldalignment)
+    - mirror
+    - misspell
+  # - musttag
+    - nakedret
+    - nestif
+    - nilerr
+  # - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+  # - nonamedreturns
+  # - nosnakecase # <=> revive(var-naming)
+    - nosprintfhostport
+  # - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - reassign
+    - revive
+    - rowserrcheck
+  # - scopelint # <=> exportloopref
+    - sloglint
+    - spancheck
+    - sqlclosecheck
+    - staticcheck
+  # - structcheck # <=> unused
+    - stylecheck
+    - tagalign
+    - tagliatelle
+    - tenv
+  # - testableexamples
+    - testifylint
+    - testpackage
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+  # - varcheck # <=> unused
+  # - varnamelen
+    - wastedassign
+  # - whitespace # <=> wsl
+    - wrapcheck
+    - wsl # <=> whitespace
+    - zerologlint
