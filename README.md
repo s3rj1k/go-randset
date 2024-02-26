@@ -39,6 +39,55 @@ To install `RandSet`, use the `go get` command:
 go get github.com/s3rj1k/go-randset
 ```
 
+### Example
+
+```
+package main
+
+import (
+	"fmt"
+
+	"github.com/s3rj1k/go-randset"
+)
+
+func main() {
+	// Create a new RandomizedSet of int type.
+	set := randset.New[int]()
+
+	// Add elements.
+	for i := range 5 {
+		set.Add(i)
+	}
+
+	// Get the content of the set.
+	fmt.Printf("Content of the set: %v\n", set.Content())
+
+	// Check if the set contains a specific element.
+	fmt.Printf("Set contains 2: %t\n", set.Contains(2))
+
+	// Check size.
+	fmt.Printf("Size of the set: %d\n", set.Size())
+
+	// Remove an element.
+	set.Remove(2)
+	fmt.Printf("After removing 2, size of the set: %d\n", set.Size())
+
+	// Check if set is empty.
+	fmt.Printf("Set empty: %t\n", set.IsEmpty())
+
+	// Load and Delete an element.
+	val, ok := set.LoadAndDelete()
+	if ok {
+		fmt.Printf("Loaded and deleted: %d\n", val)
+		fmt.Printf("Set contains %d: %t\n", val, set.Contains(val))
+	}
+
+	// Clear the set.
+	set.Clear()
+	fmt.Printf("After clear, set is empty: %t\n", set.IsEmpty())
+}
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss potential improvements or features.
