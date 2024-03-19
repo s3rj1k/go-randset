@@ -10,7 +10,7 @@
 - **Zero Dependencies**: Uses only Go's standard library, ensuring easy integration and compatibility.
 
 ## Benchmark results.
-`$ go test -run=^$ -bench=. -benchmem`
+`$ (cd benchmarks && go test -run=^$ -bench=. -benchmem)`
 
 ```
 goos: linux
