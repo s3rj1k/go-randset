@@ -17,12 +17,11 @@ goos: linux
 goarch: amd64
 pkg: github.com/s3rj1k/go-randset
 cpu: 12th Gen Intel(R) Core(TM) i5-1240P
-BenchmarkRandomSet-16            15442075        83.31 ns/op         0 B/op        0 allocs/op
-BenchmarkSliceQueue-16          231713943        5.094 ns/op        39 B/op        0 allocs/op
-BenchmarkChannelQueue-16         40679883        29.27 ns/op         0 B/op        0 allocs/op
-BenchmarkSyncMapQueue-16          3498108        338.0 ns/op        24 B/op        2 allocs/op
-PASS
-ok  	github.com/s3rj1k/go-randset	6.887s
+BenchmarkSliceQueue-16          226308338          4.814 ns/op    39 B/op        0 allocs/op
+BenchmarkChannelQueue-16         40899385         29.27 ns/op      0 B/op        0 allocs/op
+BenchmarkSwissTableQueue-16      20348682        381.9 ns/op       3 B/op        0 allocs/op
+BenchmarkRandomSet-16            12879373         88.29 ns/op      0 B/op        0 allocs/op
+BenchmarkSyncMapQueue-16          3520684        335.1 ns/op      24 B/op        2 allocs/op
 ```
 
 ## Getting Started
